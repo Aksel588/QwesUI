@@ -82,7 +82,7 @@ QwesUI.toast('Success!', 'success').show();
 
 ```bash
 # Clone the repository
-git clone https://github.com/qwesui/qwesui.git
+git clone https://github.com/Aksel588/QwesUI.git
 
 # Build from source
 cd qwesui
