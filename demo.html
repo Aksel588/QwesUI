@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QwesUI - Modern Frontend Framework</title>
+  <link rel="stylesheet" href="dist/qwesui.min.css">
+  <style>
+    /* Modern Design System */
+    :root {
+      --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      --warning-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+      --danger-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+      --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+      --glass-bg: rgba(255, 255, 255, 0.1);
+      --glass-border: rgba(255, 255, 255, 0.2);
+      --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.1);
+      --shadow-strong: 0 20px 60px rgba(0, 0, 0, 0.15);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.7;
+      color: #1a202c;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+    }
+
+    /* Modern Header */
+    .modern-header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-brand {
+      font-size: 2rem;
+      font-weight: 800;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-link {
+      font-weight: 500;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--primary-gradient);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background: var(--primary-gradient);
+      position: relative;
+      overflow: hidden;
+      padding: 8rem 0 6rem;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.1)" points="0,1000 1000,0 1000,1000"/></svg>');
+      background-size: cover;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-title {
+      font-size: 4rem;
+      font-weight: 900;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 3rem;
+      opacity: 0.95;
+    }
+
+    /* Modern Cards */
+    .modern-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 2rem;
+      padding: 3rem;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .modern-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--primary-gradient);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .modern-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .modern-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .card-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    /* Feature Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 4rem 0;
+    }
+
+    /* Component Showcase */
+    .showcase-section {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+      border-radius: 2rem;
+      padding: 4rem;
+      margin: 4rem 0;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .showcase-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 3rem;
+      background: var(--dark-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Modern Buttons */
+    .btn-modern {
+      border-radius: 1rem;
+      font-weight: 600;
+      padding: 1rem 2rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      border: none;
+    }
+
+    .btn-modern::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .btn-modern:hover::before {
+      left: 100%;
+    }
+
+    .btn-primary-modern {
+      background: var(--primary-gradient);
+      color: white;
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    }
+
+    .btn-primary-modern:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-secondary-modern {
+      background: var(--secondary-gradient);
+      color: white;
+      box-shadow: 0 8px 25px rgba(240, 147, 251, 0.3);
+    }
+
+    .btn-secondary-modern:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(240, 147, 251, 0.4);
+    }
+
+    /* Grid System Demo */
+    .grid-demo {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    .grid-item {
+      background: var(--primary-gradient);
+      color: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      text-align: center;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .grid-item:hover {
+      transform: scale(1.05);
+      box-shadow: var(--shadow-strong);
+    }
+
+    /* Tabs Modern */
+    .tabs-modern {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    .tab-modern {
+      background: transparent;
+      border: none;
+      padding: 1rem 2rem;
+      margin: 0 0.5rem;
+      border-radius: 1rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tab-modern::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--primary-gradient);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+
+    .tab-modern:hover::before {
+      opacity: 0.1;
+    }
+
+    .tab-modern.active {
+      background: var(--primary-gradient);
+      color: white;
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    }
+
+    .tab-content-modern {
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-top: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Dropdown Modern */
+    .dropdown-modern {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 1.5rem;
+      box-shadow: var(--shadow-strong);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      overflow: hidden;
+    }
+
+    .dropdown-item-modern {
+      padding: 1rem 1.5rem;
+      transition: all 0.3s ease;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .dropdown-item-modern:hover {
+      background: rgba(102, 126, 234, 0.1);
+      transform: translateX(10px);
+    }
+
+    /* Utilities Section */
+    .utilities-section {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+      border-radius: 2rem;
+      padding: 4rem;
+      margin: 4rem 0;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .utility-card-modern {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .utility-card-modern::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 2rem 2rem 0;
+      border-color: transparent transparent rgba(102, 126, 234, 0.1) transparent;
+      transition: all 0.3s ease;
+    }
+
+    .utility-card-modern:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .utility-card-modern:hover::after {
+      border-color: transparent transparent rgba(102, 126, 234, 0.2) transparent;
+    }
+
+    /* Footer Modern */
+    .modern-footer {
+      background: var(--dark-gradient);
+      color: white;
+      padding: 4rem 0 2rem;
+      margin-top: 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .modern-footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.05)" points="0,0 1000,1000 0,1000"/></svg>');
+      background-size: cover;
+    }
+
+    .footer-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer-title {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1.25rem;
+      }
+      
+      .modern-card {
+        padding: 2rem;
+      }
+      
+      .showcase-section,
+      .utilities-section {
+        padding: 2rem;
+      }
+      
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    /* Scroll Animations */
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .scroll-reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <!-- Modern Header -->
+  <header class="modern-header">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="#">QwesUI</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon">☰</span>
+        </button>
+        <div class="navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#components">Components</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#utilities">Utilities</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#grid">Grid</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-primary-modern btn-modern ms-3" href="#get-started">Get Started</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-content text-center text-white">
+        <h1 class="hero-title fade-in-up">Build Beautiful UIs Faster</h1>
+        <p class="hero-subtitle fade-in-up">QwesUI is a modern, lightweight frontend framework that provides everything you need to create stunning user interfaces.</p>
+        <div class="d-flex gap-4 justify-content-center flex-wrap fade-in-up">
+          <button class="btn btn-light btn-modern btn-lg">View Documentation</button>
+          <button class="btn btn-outline-light btn-modern btn-lg">Download</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-5">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="display-4 fw-bold mb-3">Why Choose QwesUI?</h2>
+        <p class="lead text-muted">Built for modern web development</p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="modern-card text-center scroll-reveal">
+          <span class="card-icon">🚀</span>
+          <h4 class="mb-3">Lightweight</h4>
+          <p>Built with modern CSS and minimal JavaScript. No heavy dependencies or bloat.</p>
+        </div>
+        
+        <div class="modern-card text-center scroll-reveal">
+          <span class="card-icon">🎨</span>
+          <h4 class="mb-3">Modern Design</h4>
+          <p>Clean, beautiful components with smooth animations and hover effects.</p>
+        </div>
+        
+        <div class="modern-card text-center scroll-reveal">
+          <span class="card-icon">📱</span>
+          <h4 class="mb-3">Responsive</h4>
+          <p>Mobile-first approach with a powerful grid system and utility classes.</p>
+        </div>
+        
+        <div class="modern-card text-center scroll-reveal">
+          <span class="card-icon">⚡</span>
+          <h4 class="mb-3">Fast</h4>
+          <p>Optimized for performance with minimal CSS and efficient JavaScript.</p>
+        </div>
+        
+        <div class="modern-card text-center scroll-reveal">
+          <span class="card-icon">🔧</span>
+          <h4 class="mb-3">Customizable</h4>
+          <p>Easy to modify colors, spacing, and components to match your brand.</p>
+        </div>
+        
+        <div class="modern-card text-center scroll-reveal">
+          <span class="card-icon">📚</span>
+          <h4 class="mb-3">Well Documented</h4>
+          <p>Comprehensive documentation with examples and best practices.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Components Showcase -->
+  <section id="components" class="showcase-section">
+    <div class="container">
+      <h2 class="showcase-title">Component Library</h2>
+      
+      <!-- Buttons -->
+      <div class="mb-5">
+        <h3 class="mb-4">Modern Buttons</h3>
+        <div class="d-flex gap-3 flex-wrap mb-4">
+          <button class="btn btn-primary-modern btn-modern">Primary</button>
+          <button class="btn btn-secondary-modern btn-modern">Secondary</button>
+          <button class="btn btn-success btn-modern">Success</button>
+          <button class="btn btn-warning btn-modern">Warning</button>
+          <button class="btn btn-danger btn-modern">Danger</button>
+          <button class="btn btn-info btn-modern">Info</button>
+        </div>
+        <div class="d-flex gap-3 flex-wrap mb-4">
+          <button class="btn btn-outline-primary btn-modern">Outline Primary</button>
+          <button class="btn btn-outline-secondary btn-modern">Outline Secondary</button>
+          <button class="btn btn-outline-success btn-modern">Outline Success</button>
+        </div>
+        <div class="d-flex gap-3 flex-wrap">
+          <button class="btn btn-primary btn-modern btn-sm">Small</button>
+          <button class="btn btn-primary btn-modern">Default</button>
+          <button class="btn btn-primary btn-modern btn-lg">Large</button>
+        </div>
+      </div>
+
+      <!-- Grid System -->
+      <div class="mb-5">
+        <h3 class="mb-4">Responsive Grid System</h3>
+        <div class="grid-demo">
+          <div class="row g-3 mb-3">
+            <div class="col-md-6 col-lg-3">
+              <div class="grid-item">Col 1</div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="grid-item">Col 2</div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="grid-item">Col 3</div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="grid-item">Col 4</div>
+            </div>
+          </div>
+          <div class="row g-3">
+            <div class="col-lg-8">
+              <div class="grid-item">Main Content (8 cols)</div>
+            </div>
+            <div class="col-lg-4">
+              <div class="grid-item">Sidebar (4 cols)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="mb-5">
+        <h3 class="mb-4">Interactive Tabs</h3>
+        <div class="tabs-modern">
+          <div class="tab-modern active" data-tab="tab1">Features</div>
+          <div class="tab-modern" data-tab="tab2">Documentation</div>
+          <div class="tab-modern" data-tab="tab3">Examples</div>
+        </div>
+        <div class="tab-content-modern active" data-tab-content="tab1">
+          <p>QwesUI provides a comprehensive set of components including buttons, forms, navigation, and more. All components are built with modern CSS and are fully responsive.</p>
+        </div>
+        <div class="tab-content-modern" data-tab-content="tab2">
+          <p>Complete documentation with examples, API reference, and best practices. Get started quickly with our step-by-step guides.</p>
+        </div>
+        <div class="tab-content-modern" data-tab-content="tab3">
+          <p>Real-world examples and templates to help you build faster. From simple landing pages to complex dashboards.</p>
+        </div>
+      </div>
+
+      <!-- Dropdowns -->
+      <div class="mb-5">
+        <h3 class="mb-4">Advanced Dropdowns</h3>
+        <div class="d-flex gap-4 flex-wrap">
+          <div class="dropdown">
+            <button class="btn btn-secondary btn-modern" data-dropdown="dropdown1">
+              Basic Dropdown ▼
+            </button>
+            <div class="dropdown-menu dropdown-modern">
+              <a class="dropdown-item dropdown-item-modern" href="#">Action</a>
+              <a class="dropdown-item dropdown-item-modern" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item dropdown-item-modern" href="#">Something else</a>
+            </div>
+          </div>
+          
+          <div class="dropdown">
+            <button class="btn btn-outline-primary btn-modern" data-dropdown="dropdown2">
+              With Icons ▼
+            </button>
+            <div class="dropdown-menu dropdown-modern">
+              <a class="dropdown-item dropdown-item-modern" href="#">
+                <span class="me-2">📧</span>
+                Messages
+              </a>
+              <a class="dropdown-item dropdown-item-modern" href="#">
+                <span class="me-2">⚙️</span>
+                Settings
+              </a>
+              <a class="dropdown-item dropdown-item-modern" href="#">
+                <span class="me-2">👤</span>
+                Profile
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Utilities Section -->
+  <section id="utilities" class="utilities-section">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="showcase-title">Utility Classes</h2>
+        <p class="lead text-muted">Powerful utility classes for rapid UI development</p>
+      </div>
+      
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="utility-card-modern">
+            <div class="d-flex align-items-center mb-3">
+              <span class="me-3">📏</span>
+              <h4 class="mb-0">Spacing System</h4>
+            </div>
+            <p class="text-muted mb-3">Consistent spacing with responsive utilities</p>
+            <div class="d-flex gap-2 flex-wrap">
+              <div class="bg-primary text-white p-3 rounded">Primary</div>
+              <div class="bg-success text-white p-3 rounded">Success</div>
+              <div class="bg-warning text-white p-3 rounded">Warning</div>
+              <div class="bg-danger text-white p-3 rounded">Danger</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-6">
+          <div class="utility-card-modern">
+            <div class="d-flex align-items-center mb-3">
+              <span class="me-3">🎨</span>
+              <h4 class="mb-0">Color System</h4>
+            </div>
+            <p class="text-muted mb-3">Semantic color system with modern palettes</p>
+            <div class="d-flex gap-2 flex-wrap">
+              <div class="bg-primary text-white p-3 rounded">Primary</div>
+              <div class="bg-success text-white p-3 rounded">Success</div>
+              <div class="bg-warning text-white p-3 rounded">Warning</div>
+              <div class="bg-danger text-white p-3 rounded">Danger</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-6">
+          <div class="utility-card-modern">
+            <div class="d-flex align-items-center mb-3">
+              <span class="me-3">🔧</span>
+              <h4 class="mb-0">Flexbox Utilities</h4>
+            </div>
+            <p class="text-muted mb-3">Advanced layout utilities for modern designs</p>
+            <div class="d-flex gap-3 justify-content-center align-items-center bg-light p-3 rounded">
+              <div class="bg-primary text-white p-2 rounded">Item 1</div>
+              <div class="bg-secondary text-white p-2 rounded">Item 2</div>
+              <div class="bg-success text-white p-2 rounded">Item 3</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-6">
+          <div class="utility-card-modern">
+            <div class="d-flex align-items-center mb-3">
+              <span class="me-3">✨</span>
+              <h4 class="mb-0">Shadows & Effects</h4>
+            </div>
+            <p class="text-muted mb-3">Modern shadow system and visual effects</p>
+            <div class="shadow-demo">
+              <div class="bg-white p-3 rounded mb-2 shadow-sm">.shadow-sm</div>
+              <div class="bg-white p-3 rounded mb-2 shadow">.shadow</div>
+              <div class="bg-white p-3 rounded shadow-lg">.shadow-lg</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Get Started Section -->
+  <section id="get-started" class="py-5">
+    <div class="container">
+      <div class="modern-card text-center">
+        <h2 class="display-4 fw-bold mb-4">Ready to Get Started?</h2>
+        <p class="lead mb-5">Join thousands of developers building amazing UIs with QwesUI</p>
+        <div class="d-flex gap-4 justify-content-center flex-wrap">
+          <button class="btn btn-primary-modern btn-modern btn-lg">Download Now</button>
+          <button class="btn btn-secondary-modern btn-modern btn-lg">View on GitHub</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modern Footer -->
+  <footer class="modern-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <h3 class="footer-title">QwesUI</h3>
+            <p class="mb-4">Modern, lightweight frontend framework for building beautiful user interfaces faster than ever.</p>
+            <div class="d-flex gap-3">
+              <a href="#" class="text-white text-decoration-none">📧</a>
+              <a href="#" class="text-white text-decoration-none">🐦</a>
+              <a href="#" class="text-white text-decoration-none">📘</a>
+              <a href="#" class="text-white text-decoration-none">💻</a>
+            </div>
+          </div>
+          
+          <div class="col-lg-2">
+            <h5 class="mb-3">Framework</h5>
+            <ul class="footer-links">
+              <li><a href="#">Components</a></li>
+              <li><a href="#">Utilities</a></li>
+              <li><a href="#">Grid System</a></li>
+              <li><a href="#">Theming</a></li>
+            </ul>
+          </div>
+          
+          <div class="col-lg-2">
+            <h5 class="mb-3">Resources</h5>
+            <ul class="footer-links">
+              <li><a href="#">Documentation</a></li>
+              <li><a href="#">Examples</a></li>
+              <li><a href="#">Templates</a></li>
+              <li><a href="#">Community</a></li>
+            </ul>
+          </div>
+          
+          <div class="col-lg-2">
+            <h5 class="mb-3">Support</h5>
+            <ul class="footer-links">
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">Issues</a></li>
+              <li><a href="#">Discussions</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+          
+          <div class="col-lg-2">
+            <h5 class="mb-3">Company</h5>
+            <ul class="footer-links">
+              <li><a href="#">About</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Privacy</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+        
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <p class="mb-0">&copy; 2024 QwesUI. Built with ❤️ for modern web development.</p>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <p class="mb-0">MIT License • Made with modern web technologies</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="dist/qwesui.min.js"></script>
+  <script>
+    // Tab functionality
+    document.querySelectorAll('.tab-modern').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.getAttribute('data-tab');
+        
+        // Remove active class from all tabs and contents
+        document.querySelectorAll('.tab-modern').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-content-modern').forEach(c => c.classList.remove('active'));
+        
+        // Add active class to clicked tab and corresponding content
+        tab.classList.add('active');
+        document.querySelector(`[data-tab-content="${target}"]`).classList.add('active');
+      });
+    });
+
+    // Dropdown functionality
+    document.querySelectorAll('[data-dropdown]').forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const dropdown = button.nextElementSibling;
+        dropdown.classList.toggle('show');
+      });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.dropdown-menu').forEach(menu => {
+        menu.classList.remove('show');
+      });
+    });
+
+    // Navbar toggle for mobile
+    document.querySelector('.navbar-toggler').addEventListener('click', () => {
+      document.querySelector('.navbar-collapse').classList.toggle('show');
+    });
+
+    // Scroll reveal animation
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.scroll-reveal').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('.modern-header');
+      if (window.scrollY > 100) {
+        header.style.background = 'rgba(255, 255, 255, 0.98)';
+        header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+      } else {
+        header.style.background = 'rgba(255, 255, 255, 0.95)';
+        header.style.boxShadow = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
