@@ -1,0 +1,498 @@
+// Form Components
+// ===============
+
+.form {
+  // Form validation states
+  &.form-validated {
+    .form-control.is-valid {
+      border-color: $success;
+      
+      &:focus {
+        @include focus-ring($success);
+      }
+    }
+    
+    .form-control.is-invalid {
+      border-color: $danger;
+      
+      &:focus {
+        @include focus-ring($danger);
+      }
+    }
+  }
+}
+
+.form-group {
+  margin-bottom: 1rem;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: $font-weight-medium;
+  color: $dark;
+  
+  &.required::after {
+    content: " *";
+    color: $danger;
+  }
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $dark;
+  background-color: $white;
+  background-clip: padding-box;
+  border: 1px solid $gray-300;
+  border-radius: $border-radius;
+  @include transition(border-color, $transition-fast);
+  
+  &:focus {
+    color: $dark;
+    background-color: $white;
+    border-color: $primary;
+    outline: 0;
+    @include focus-ring;
+  }
+  
+  &::placeholder {
+    color: $gray-500;
+    opacity: 1;
+  }
+  
+  &:disabled,
+  &[readonly] {
+    background-color: $gray-100;
+    opacity: 1;
+  }
+  
+  // Sizes
+  &.form-control-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: $font-size-sm;
+    border-radius: $border-radius-sm;
+  }
+  
+  &.form-control-lg {
+    padding: 0.75rem 1rem;
+    font-size: $font-size-lg;
+    border-radius: $border-radius-lg;
+  }
+  
+  // Validation states
+  &.is-valid {
+    border-color: $success;
+    
+    &:focus {
+      @include focus-ring($success);
+    }
+  }
+  
+  &.is-invalid {
+    border-color: $danger;
+    
+    &:focus {
+      @include focus-ring($danger);
+    }
+  }
+  
+  // Input types
+  &[type="file"] {
+    padding: 0.375rem 0.75rem;
+    
+    &::-webkit-file-upload-button {
+      padding: 0.375rem 0.75rem;
+      margin: -0.375rem -0.75rem;
+      margin-inline-end: 0.75rem;
+      color: $dark;
+      background-color: $gray-200;
+      border: 0;
+      border-inline-end: 1px solid $gray-300;
+      border-radius: 0;
+      @include transition(background-color, $transition-fast);
+      
+      &:hover {
+        background-color: $gray-300;
+      }
+    }
+  }
+  
+  &[type="color"] {
+    height: 2.5rem;
+    padding: 0.25rem;
+  }
+  
+  &[type="range"] {
+    height: 1.5rem;
+    padding: 0;
+    background-color: transparent;
+    
+    &::-webkit-slider-thumb {
+      appearance: none;
+      height: 1rem;
+      width: 1rem;
+      border-radius: 50%;
+      background: $primary;
+      cursor: pointer;
+      @include box-shadow($box-shadow);
+    }
+    
+    &::-moz-range-thumb {
+      height: 1rem;
+      width: 1rem;
+      border-radius: 50%;
+      background: $primary;
+      cursor: pointer;
+      border: 0;
+      @include box-shadow($box-shadow);
+    }
+  }
+}
+
+// Form text
+.form-text {
+  margin-top: 0.25rem;
+  font-size: $font-size-sm;
+  color: $gray-600;
+}
+
+// Form validation feedback
+.form-valid-feedback {
+  display: none;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: $font-size-sm;
+  color: $success;
+}
+
+.form-invalid-feedback {
+  display: none;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: $font-size-sm;
+  color: $danger;
+}
+
+.form-control.is-valid ~ .form-valid-feedback {
+  display: block;
+}
+
+.form-control.is-invalid ~ .form-invalid-feedback {
+  display: block;
+}
+
+// Form check
+.form-check {
+  display: block;
+  min-height: 1.5rem;
+  padding-left: 1.5rem;
+  margin-bottom: 0.125rem;
+}
+
+.form-check-input {
+  position: absolute;
+  margin-top: 0.3rem;
+  margin-left: -1.5rem;
+  
+  &:focus {
+    @include focus-ring;
+  }
+  
+  &:checked {
+    background-color: $primary;
+    border-color: $primary;
+  }
+  
+  &:checked[type="checkbox"] {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+  }
+  
+  &:checked[type="radio"] {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e");
+  }
+  
+  &[type="checkbox"] {
+    border-radius: $border-radius-sm;
+  }
+  
+  &[type="radio"] {
+    border-radius: 50%;
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+.form-check-label {
+  color: $dark;
+  cursor: pointer;
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.form-check-input:disabled ~ .form-check-label {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+// Form switch
+.form-switch {
+  padding-left: 2.5rem;
+  
+  .form-check-input {
+    width: 2rem;
+    margin-left: -2.5rem;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280, 0, 0, 0.25%29'/%3e%3c/svg%3e");
+    background-position: left center;
+    border-radius: 2rem;
+    @include transition(background-position, $transition-fast);
+    
+    &:checked {
+      background-position: right center;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+    }
+  }
+}
+
+// Form select
+.form-select {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 2.25rem 0.5rem 0.75rem;
+  font-size: $font-size-base;
+  font-weight: $font-weight-normal;
+  line-height: $line-height-base;
+  color: $dark;
+  background-color: $white;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m1 6 7 7 7-7'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+  border: 1px solid $gray-300;
+  border-radius: $border-radius;
+  appearance: none;
+  @include transition(border-color, $transition-fast);
+  
+  &:focus {
+    border-color: $primary;
+    outline: 0;
+    @include focus-ring;
+  }
+  
+  &:disabled {
+    background-color: $gray-100;
+    opacity: 1;
+  }
+  
+  // Sizes
+  &.form-select-sm {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.5rem;
+    font-size: $font-size-sm;
+    border-radius: $border-radius-sm;
+  }
+  
+  &.form-select-lg {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-left: 1rem;
+    font-size: $font-size-lg;
+    border-radius: $border-radius-lg;
+  }
+}
+
+// Form range
+.form-range {
+  width: 100%;
+  height: 1.5rem;
+  padding: 0;
+  background-color: transparent;
+  appearance: none;
+  
+  &::-webkit-slider-thumb {
+    appearance: none;
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50%;
+    background: $primary;
+    cursor: pointer;
+    @include box-shadow($box-shadow);
+  }
+  
+  &::-moz-range-thumb {
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50%;
+    background: $primary;
+    cursor: pointer;
+    border: 0;
+    @include box-shadow($box-shadow);
+  }
+  
+  &::-webkit-slider-track {
+    width: 100%;
+    height: 0.5rem;
+    color: transparent;
+    cursor: pointer;
+    background-color: $gray-200;
+    border-color: transparent;
+    border-radius: $border-radius;
+  }
+  
+  &::-moz-range-track {
+    width: 100%;
+    height: 0.5rem;
+    color: transparent;
+    cursor: pointer;
+    background-color: $gray-200;
+    border-color: transparent;
+    border-radius: $border-radius;
+  }
+}
+
+// Input groups
+.input-group {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+  
+  .form-control,
+  .form-select {
+    position: relative;
+    flex: 1 1 auto;
+    width: 1%;
+    min-width: 0;
+    
+    &:focus {
+      z-index: 3;
+    }
+  }
+  
+  .btn {
+    position: relative;
+    z-index: 2;
+    
+    &:focus {
+      z-index: 3;
+    }
+  }
+  
+  .input-group-text {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    font-size: $font-size-base;
+    font-weight: $font-weight-normal;
+    line-height: $line-height-base;
+    color: $gray-700;
+    text-align: center;
+    white-space: nowrap;
+    background-color: $gray-100;
+    border: 1px solid $gray-300;
+    border-radius: $border-radius;
+  }
+  
+  .input-group-text:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  
+  .input-group-text:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  
+  .form-control:not(:last-child),
+  .form-select:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  
+  .form-control:not(:first-child),
+  .form-select:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+// Form floating labels
+.form-floating {
+  position: relative;
+  
+  .form-control,
+  .form-select {
+    height: calc(3.5rem + 2px);
+    line-height: 1.25;
+    padding: 1rem 0.75rem;
+  }
+  
+  .form-control::placeholder {
+    color: transparent;
+  }
+  
+  .form-floating-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    padding: 1rem 0.75rem;
+    pointer-events: none;
+    border: 1px solid transparent;
+    transform-origin: 0 0;
+    @include transition(opacity, $transition-fast), transform($transition-fast);
+  }
+  
+  .form-control:focus ~ .form-floating-label,
+  .form-control:not(:placeholder-shown) ~ .form-floating-label {
+    opacity: 0.65;
+    transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+  }
+  
+  .form-control:focus ~ .form-floating-label {
+    color: $primary;
+  }
+}
+
+// Form validation
+.was-validated {
+  .form-control:valid,
+  .form-control.is-valid {
+    border-color: $success;
+    
+    &:focus {
+      @include focus-ring($success);
+    }
+  }
+  
+  .form-control:invalid,
+  .form-control.is-invalid {
+    border-color: $danger;
+    
+    &:focus {
+      @include focus-ring($danger);
+    }
+  }
+}
+
+// Responsive forms
+@include media-breakpoint-down(sm) {
+  .form-control,
+  .form-select {
+    font-size: 16px; // Prevents zoom on iOS
+  }
+}

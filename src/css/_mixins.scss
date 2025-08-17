@@ -1,0 +1,179 @@
+// QwesUI Mixins
+// ==============
+
+// Media Query Mixins
+@mixin media-breakpoint-up($breakpoint) {
+  $min: map-get($breakpoints, $breakpoint);
+  @if $min != 0 {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin media-breakpoint-down($breakpoint) {
+  $max: map-get($breakpoints, $breakpoint);
+  @if $max and $max > 0 {
+    @media (max-width: $max - 0.02px) {
+      @content;
+    }
+  }
+}
+
+@mixin media-breakpoint-between($lower, $upper) {
+  $min: map-get($breakpoints, $lower);
+  $max: map-get($breakpoints, $upper);
+  
+  @if $min != 0 and $max {
+    @media (min-width: $min) and (max-width: $max - 0.02px) {
+      @content;
+    }
+  }
+}
+
+// Typography Mixins
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin text-break {
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+// Flexbox Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// Button Mixins
+@mixin button-variant($background, $border, $color: $white) {
+  background-color: $background;
+  border-color: $border;
+  color: $color;
+  
+  &:hover {
+    background-color: darken($background, 7.5%);
+    border-color: darken($border, 10%);
+    color: $color;
+  }
+  
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba($background, 0.5);
+  }
+  
+  &:active {
+    background-color: darken($background, 10%);
+    border-color: darken($border, 12.5%);
+  }
+}
+
+@mixin button-outline-variant($color) {
+  color: $color;
+  border-color: $color;
+  background-color: transparent;
+  
+  &:hover {
+    color: $white;
+    background-color: $color;
+    border-color: $color;
+  }
+  
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba($color, 0.5);
+  }
+}
+
+// Transition Mixins
+@mixin transition($property: all, $duration: $transition-base, $timing: ease-in-out) {
+  transition: $property $duration $timing;
+}
+
+@mixin transition-transform($duration: $transition-base) {
+  transition: transform $duration ease-in-out;
+}
+
+// Shadow Mixins
+@mixin box-shadow($shadow: $box-shadow) {
+  box-shadow: $shadow;
+}
+
+@mixin box-shadow-lg {
+  box-shadow: $box-shadow-lg;
+}
+
+// Border Radius Mixins
+@mixin border-radius($radius: $border-radius) {
+  border-radius: $radius;
+}
+
+@mixin border-radius-pill {
+  border-radius: $border-radius-pill;
+}
+
+// Focus Mixins
+@mixin focus-ring($color: $primary, $width: 0.2rem) {
+  outline: 0;
+  box-shadow: 0 0 0 $width rgba($color, 0.5);
+}
+
+// Screen Reader Only
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Clearfix
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+// Gradient Mixins
+@mixin gradient-primary {
+  background: linear-gradient(135deg, $primary 0%, $primary-light 100%);
+}
+
+@mixin gradient-secondary {
+  background: linear-gradient(135deg, $secondary 0%, $secondary-light 100%);
+}
+
+// Animation Mixins
+@mixin fade-in($duration: 0.3s) {
+  animation: fadeIn $duration ease-in-out;
+}
+
+@mixin slide-up($duration: 0.3s) {
+  animation: slideUp $duration ease-in-out;
+}
+
+@mixin bounce {
+  animation: bounce 0.6s ease-in-out;
+}

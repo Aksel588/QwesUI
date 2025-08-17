@@ -1,0 +1,231 @@
+// Button Components
+// =================
+
+.btn {
+  display: inline-block;
+  font-weight: $font-weight-normal;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.5rem 1rem;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  border-radius: $border-radius;
+  @include transition(background-color, $transition-fast);
+  cursor: pointer;
+  text-decoration: none;
+  
+  &:focus {
+    @include focus-ring;
+  }
+  
+  &:disabled,
+  &.disabled {
+    opacity: 0.65;
+    pointer-events: none;
+  }
+  
+  // Button Sizes
+  &.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: $font-size-sm;
+    border-radius: $border-radius-sm;
+  }
+  
+  &.btn-lg {
+    padding: 0.75rem 1.5rem;
+    font-size: $font-size-lg;
+    border-radius: $border-radius-lg;
+  }
+  
+  &.btn-xl {
+    padding: 1rem 2rem;
+    font-size: $font-size-lg;
+    border-radius: $border-radius-xl;
+  }
+  
+  // Button Variants
+  &.btn-primary {
+    @include button-variant($primary, $primary);
+  }
+  
+  &.btn-secondary {
+    @include button-variant($secondary, $secondary);
+  }
+  
+  &.btn-success {
+    @include button-variant($success, $success);
+  }
+  
+  &.btn-warning {
+    @include button-variant($warning, $warning);
+  }
+  
+  &.btn-danger {
+    @include button-variant($danger, $danger);
+  }
+  
+  &.btn-info {
+    @include button-variant($info, $info);
+  }
+  
+  &.btn-light {
+    @include button-variant($light, $gray-300, $dark);
+  }
+  
+  &.btn-dark {
+    @include button-variant($dark, $dark);
+  }
+  
+  // Outline Variants
+  &.btn-outline-primary {
+    @include button-outline-variant($primary);
+  }
+  
+  &.btn-outline-secondary {
+    @include button-outline-variant($secondary);
+  }
+  
+  &.btn-outline-success {
+    @include button-outline-variant($success);
+  }
+  
+  &.btn-outline-warning {
+    @include button-outline-variant($warning);
+  }
+  
+  &.btn-outline-danger {
+    @include button-outline-variant($danger);
+  }
+  
+  &.btn-outline-info {
+    @include button-outline-variant($info);
+  }
+  
+  &.btn-outline-light {
+    @include button-outline-variant($light);
+  }
+  
+  &.btn-outline-dark {
+    @include button-outline-variant($dark);
+  }
+  
+  // Button Groups
+  &.btn-group-item {
+    border-radius: 0;
+    
+    &:first-child {
+      border-top-left-radius: $border-radius;
+      border-bottom-left-radius: $border-radius;
+    }
+    
+    &:last-child {
+      border-top-right-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+    }
+  }
+  
+  // Icon Buttons
+  &.btn-icon {
+    padding: 0.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    @include flex-center;
+    
+    &.btn-sm {
+      width: 2rem;
+      height: 2rem;
+      padding: 0.25rem;
+    }
+    
+    &.btn-lg {
+      width: 3rem;
+      height: 3rem;
+      padding: 0.75rem;
+    }
+  }
+  
+  // Loading State
+  &.btn-loading {
+    position: relative;
+    color: transparent !important;
+    
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 1rem;
+      height: 1rem;
+      margin: -0.5rem 0 0 -0.5rem;
+      border: 2px solid currentColor;
+      border-radius: 50%;
+      border-right-color: transparent;
+      animation: spin 0.75s linear infinite;
+    }
+  }
+  
+  // Gradient Buttons
+  &.btn-gradient-primary {
+    @include gradient-primary;
+    border: none;
+    color: $white;
+    
+    &:hover {
+      background: linear-gradient(135deg, darken($primary, 10%) 0%, darken($primary-light, 10%) 100%);
+    }
+  }
+  
+  &.btn-gradient-secondary {
+    @include gradient-secondary;
+    border: none;
+    color: $white;
+    
+    &:hover {
+      background: linear-gradient(135deg, darken($secondary, 10%) 0%, darken($secondary-light, 10%) 100%);
+    }
+  }
+}
+
+// Button Group
+.btn-group {
+  display: inline-flex;
+  vertical-align: middle;
+  
+  .btn {
+    position: relative;
+    flex: 1 1 auto;
+    
+    &:hover,
+    &:focus,
+    &:active {
+      z-index: 1;
+    }
+  }
+  
+  &.btn-group-vertical {
+    flex-direction: column;
+    
+    .btn {
+      border-radius: 0;
+      
+      &:first-child {
+        border-top-left-radius: $border-radius;
+        border-top-right-radius: $border-radius;
+      }
+      
+      &:last-child {
+        border-bottom-left-radius: $border-radius;
+        border-bottom-right-radius: $border-radius;
+      }
+    }
+  }
+}
+
+// Loading Animation
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
