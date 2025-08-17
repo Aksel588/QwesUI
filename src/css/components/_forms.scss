@@ -454,7 +454,8 @@
     pointer-events: none;
     border: 1px solid transparent;
     transform-origin: 0 0;
-    @include transition(opacity, $transition-fast), transform($transition-fast);
+    @include transition(opacity, $transition-fast);
+    @include transition(transform, $transition-fast);
   }
   
   .form-control:focus ~ .form-floating-label,

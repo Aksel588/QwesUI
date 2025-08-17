@@ -5,42 +5,11 @@
 @import 'variables';
 @import 'mixins';
 
-// 2. Reset & Base Styles
-@import 'base/reset';
-@import 'base/typography';
-@import 'base/colors';
-
-// 3. Utility Classes
+// 2. Utility Classes
 @import 'utilities/spacing';
-@import 'utilities/flexbox';
-@import 'utilities/grid';
-@import 'utilities/typography';
-@import 'utilities/colors';
-@import 'utilities/borders';
-@import 'utilities/shadows';
-@import 'utilities/animations';
 
-// 4. Components
+// 3. Components
 @import 'components/buttons';
 @import 'components/cards';
 @import 'components/forms';
 @import 'components/modals';
-@import 'components/navbars';
-@import 'components/tables';
-@import 'components/alerts';
-@import 'components/badges';
-@import 'components/tooltips';
-@import 'components/dropdowns';
-@import 'components/tabs';
-@import 'components/toasts';
-
-// 5. Layout & Grid System
-@import 'layout/container';
-@import 'layout/grid';
-@import 'layout/breakpoints';
-
-// 6. Dark Mode Support
-@import 'themes/dark-mode';
-
-// 7. Responsive Utilities
-@import 'utilities/responsive';
